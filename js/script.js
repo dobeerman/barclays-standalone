@@ -14,6 +14,8 @@ new Vue({
       closest: [],
       noPosition: false,
       resources: [],
+      loadingText: 'Loading...',
+      percents: 0,
     };
   },
 
@@ -23,10 +25,15 @@ new Vue({
     const atms = await this.api('atms');
     this.$store.dispatch('setATM', atms.ATM);
     this.resources.push('[1/2] ATMs loaded.');
+    this.percents = 50;
 
     const branches = await this.api('branches');
     this.$store.dispatch('setBranches', branches.Branch);
     this.resources.push('[2/2] Branches loaded.');
+    this.percents = 100;
+
+    this.loadingText = 'Fetching geoposition...';
+    this.resources = [];
 
     this.watchId = await navigator.geolocation.watchPosition(this.geoSuccess, this.geoError, this.geoOptions);
   },
@@ -50,7 +57,6 @@ new Vue({
     },
 
     geoSuccess(position) {
-      this.resources = [];
       this.origins.lat = position.coords.longitude;
       this.origins.lng = position.coords.latitude;
     },

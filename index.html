@@ -75,7 +75,10 @@
             <div v-else>
               <ul class="list-elements" v-if="isLoading">
                 <li class="list-element text-center">
-                  <p class="heading-2">Loading...</p>
+                  <div class="w3-light-grey w3-round">
+                    <div class="w3-container w3-rebank-pink w3-round" :style="`width:${percents}%`">{{ percents }}%</div>
+                  </div>
+                  <p class="heading-2">{{ loadingText }}</p>
                   <p class="heading-3" v-for="(r, i) in resources" :key="i">{{ r }}</p>
                 </li>
               </ul>
