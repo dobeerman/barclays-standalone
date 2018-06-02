@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Barclay's 10 closest ATMs</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600" rel="stylesheet">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script src="https://unpkg.com/vuex"></script>
+  <script src="https://unpkg.com/vue-resource@1.5.1/dist/vue-resource.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  <div id="app">
+    <div class="container u-full-width u-max-full-width container-main">
+      <div class="row row-top row-content">
+        <div class="three columns text-center">&nbsp;</div>
+        <div class="six columns text-center">
+          <p class="heading-1">Barclays UK _ ATMs</p>
+        </div>
+        <div class="three columns text-center">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="three columns text-center">&nbsp;</div>
+        <div class="six columns text-center">
+          <p class="heading-2">
+            <span class="heading-snap">Ten closest ATMs to you.</span>&nbsp;&nbsp;
+          </p>
+        </div>
+        <div class="three columns text-center">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="section hero">
+      <div class="container">
+        <div class="row">
+          <div class="three columns text-center">&nbsp;</div>
+
+          <div class="six columns list-wrapper">
+            <ul v-if="noPosition" class="list-elements">
+              <li class="list-element">
+                <p class="heading-2">
+                  <span class="heading-snap">No position.</span>
+                  <p>Refresh this page to try again.</p>
+                </p>
+              </li>
+            </ul>
+            <div v-else>
+              <ul class="list-elements" v-if="isLoading">
+                <li class="list-element text-center">
+                  <p class="heading-2">Loading...</p>
+                  <p class="heading-3" v-for="(r, i) in resources" :key="i">{{ r }}</p>
+                </li>
+              </ul>
+              <ul v-else class="list-elements">
+                <li v-for="atm in closest" :key="atm.Identification" class="list-element atm" @click="onClickItem" :id="atm.Identification">
+                  <div class="arrow"></div>
+                  <p class="heading-2">
+                    <span class="heading-snap">{{ brandName(atm.Identification) }} {{ atm.Location.PostalAddress.Country }}</span>
+                  </p>
+                  <p class="heading-3">{{ makeAddress(atm.Location.PostalAddress) }}</p>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+          <div class="three columns text-center">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script>
+    Vue.config.devtools = true;
+  </script>
+
+  <script src="./js/store.js"></script>
+  <script src="./js/script.js"></script>
+
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>
