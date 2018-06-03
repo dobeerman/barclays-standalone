@@ -76,8 +76,8 @@ new Vue({
 
     onClickItem(e) {
       const id = e.target.closest('li').id;
-      const atm = this.closest.find(el => el.Identification === id);
-      const LatLng = atm.Location.PostalAddress.GeoLocation.GeographicCoordinates;
+      const atm = this.closest.find(el => el.atm.Identification === id);
+      const LatLng = atm.atm.Location.PostalAddress.GeoLocation.GeographicCoordinates;
       const googleMapsUri = `https://www.google.com/maps/dir/?api=1&origin=${this.origins.lng},${
         this.origins.lat
       }&destination=${LatLng.Latitude},${LatLng.Longitude}`;
