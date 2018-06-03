@@ -32,22 +32,15 @@ const store = new Vuex.Store({
 
     getClosest: (state, { getAtms, getBranches }) => payload => {
       const { origin, num } = payload;
+      const addDist = atm => {
+        const { Latitude, Longitude } = atm.Location.PostalAddress.GeoLocation.GeographicCoordinates;
+        return { atm, dist: LatLngDist(origin, [Latitude, Longitude]) };
+      };
+      const sortByDistance = R.sortBy(R.prop('dist'));
+      const atmsSorted = sortByDistance(R.map(addDist, getAtms));
+      const atmsSliced = R.slice(0, num || 10, atmsSorted);
 
-      const atms = getAtms
-        .map((el, idx) => {
-          const { Latitude, Longitude } = el.Location.PostalAddress.GeoLocation.GeographicCoordinates;
-
-          return {
-            idx,
-            dist: LatLngDist(origin, [Latitude, Longitude]),
-          };
-        })
-        .sort((a, b) => a.dist > b.dist)
-        .slice(0, num || 10);
-
-      const atmsWithBranches = atms.map(atm => getAtms[atm.idx]);
-
-      return atmsWithBranches;
+      return atmsSliced;
     },
 
     getAtms: state => state.atms,

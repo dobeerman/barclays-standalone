@@ -30,6 +30,7 @@
   <script src="https://vuejs.org/js/vue.js"></script>
   <script src="https://unpkg.com/vuex"></script>
   <script src="https://unpkg.com/vue-resource@1.5.1/dist/vue-resource.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ramda@0.24/dist/ramda.min.js"></script>
 
 </head>
 
@@ -83,12 +84,12 @@
                 </li>
               </ul>
               <ul v-else class="list-elements">
-                <li v-for="atm in closest" :key="atm.Identification" class="list-element atm" @click="onClickItem" :id="atm.Identification">
+                <li v-for="atm in closest" :key="atm.atm.Identification" class="list-element atm" @click="onClickItem" :id="atm.atm.Identification">
                   <div class="arrow"></div>
                   <p class="heading-2">
-                    <span class="heading-snap">{{ brandName(atm.Identification) }} {{ atm.Location.PostalAddress.Country }}</span>
+                    <span class="heading-snap">{{ brandName(atm.atm.Identification) }} {{ atm.atm.Location.PostalAddress.Country }}</span>
                   </p>
-                  <p class="heading-3">{{ makeAddress(atm.Location.PostalAddress) }}</p>
+                  <p class="heading-3">{{ makeAddress(atm.atm.Location.PostalAddress) }}</p>
                 </li>
               </ul>
 
