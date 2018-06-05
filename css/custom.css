@@ -192,10 +192,6 @@ li.list-element {
   margin-bottom: 0;
 }
 
-li.list-element.atm {
-  cursor: pointer;
-}
-
 li.list-element:not(:last-child) {
   border-bottom: 1px solid #c2c2c2;
 }
@@ -204,8 +200,20 @@ li.list-element p {
   margin-bottom: 0;
 }
 
-li.list-element.atm:hover p {
+li.list-element.atm p .show-map {
+  display: none;
   color: #ed4b72;
+  margin-left: 1rem;
+  font-size: 11px;
+  text-transform: uppercase;
+  border: 1px solid #ed4b72;
+  padding: 0.2rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+li.list-element.atm:hover p .show-map {
+  display: inline;
 }
 
 .w3-light-gray {

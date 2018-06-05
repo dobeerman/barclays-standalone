@@ -62,9 +62,9 @@
     <div class="section hero">
       <div class="container">
         <div class="row">
-          <div class="three columns text-center">&nbsp;</div>
+          <div class="two columns text-center">&nbsp;</div>
 
-          <div class="six columns list-wrapper">
+          <div class="eight columns list-wrapper">
             <ul v-if="noPosition" class="list-elements">
               <li class="list-element">
                 <p class="heading-2">
@@ -84,19 +84,17 @@
                 </li>
               </ul>
               <ul v-else class="list-elements">
-                <li v-for="atm in closest" :key="atm.atm.Identification" class="list-element atm" @click="onClickItem" :id="atm.atm.Identification">
-                  <div class="arrow"></div>
-                  <p class="heading-2">
-                    <span class="heading-snap">{{ brandName(atm.atm.Identification) }} {{ atm.atm.Location.PostalAddress.Country }}</span>
+                <li v-for="atm in closest" :key="atm.atm.Identification" class="list-element atm" :id="atm.atm.Identification">
+                  <p class="heading-3">{{ makeAddress(atm.atm.Location.PostalAddress) }}
+                    <span class="show-map" @click="onClickItem">Show map</span>
                   </p>
-                  <p class="heading-3">{{ makeAddress(atm.atm.Location.PostalAddress) }}</p>
                 </li>
               </ul>
 
             </div>
           </div>
 
-          <div class="three columns text-center">&nbsp;</div>
+          <div class="two columns text-center">&nbsp;</div>
         </div>
       </div>
     </div>
