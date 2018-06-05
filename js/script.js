@@ -25,12 +25,12 @@ new Vue({
     const atms = await this.api('atms');
     this.$store.dispatch('setATM', atms.ATM);
     this.resources.push('[1/2] ATMs loaded.');
-    this.percents = 50;
-
-    const branches = await this.api('branches');
-    this.$store.dispatch('setBranches', branches.Branch);
-    this.resources.push('[2/2] Branches loaded.');
     this.percents = 100;
+
+    // const branches = await this.api('branches');
+    // this.$store.dispatch('setBranches', branches.Branch);
+    // this.resources.push('[2/2] Branches loaded.');
+    // this.percents = 100;
 
     this.loadingText = 'Fetching geoposition...';
     this.resources = [];
@@ -85,12 +85,6 @@ new Vue({
       window.open(googleMapsUri, '_blank');
     },
 
-    brandName(id) {
-      const branch = this.$store.getters.getBrandName(id);
-
-      return branch ? branch.Name : 'Barclays Bank';
-    },
-
     /**
      * Addressee's name
      * House number and street name
@@ -100,6 +94,7 @@ new Vue({
      */
     makeAddress(address) {
       return [
+        address.Country,
         address.BuildingNumber,
         address.StreetName,
         address.TownName && address.TownName.toUpperCase(),
